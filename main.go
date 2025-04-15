@@ -1,15 +1,18 @@
 package exregexp
 
 import (
-	"regexp"
 	"strings"
 )
+
+type Regexp interface {
+	FindAllStringSubmatchIndex(string, int) [][]int
+}
 
 // ReplaceAllStringSubmatchFunc applies a replacement function to all
 // matches of the regular expression in the input string. The replacement
 // function receives a slice of submatches, where the first element is the
 // entire match and subsequent elements are the capturing groups.
-func ReplaceAllStringSubmatchFunc(rx *regexp.Regexp, input string, f func([]string) string) string {
+func ReplaceAllStringSubmatchFunc(rx Regexp, input string, f func([]string) string) string {
 	var result strings.Builder
 
 	matches := rx.FindAllStringSubmatchIndex(input, -1)
