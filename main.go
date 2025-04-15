@@ -22,7 +22,13 @@ func ReplaceAllStringSubmatchFunc(rx Regexp, input string, f func([]string) stri
 
 		sub := make([]string, len(match))
 		for i := 0; i*2 < len(match); i++ {
-			sub[i] = input[match[i*2]:match[i*2+1]]
+			if from := match[i*2]; from < 0 {
+				sub[i] = ""
+			} else if to := match[i*2+1]; to < 0 {
+				sub[i] = ""
+			} else {
+				sub[i] = input[from:to]
+			}
 		}
 		result.WriteString(f(sub))
 

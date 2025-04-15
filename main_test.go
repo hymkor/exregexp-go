@@ -42,4 +42,27 @@ func TestReplaceAllStringSubmatchFunc(t *testing.T) {
 	if result != expect {
 		t.Fatalf("(2) expect `%s`, but `%s`", expect, result)
 	}
+
+	rx, err = regexp.Compile(`([a-zA-Z]+)([0-9])?`)
+	if err != nil {
+		t.Fatalf("test regexp error: %s", err.Error())
+	}
+	result = ReplaceAllStringSubmatchFunc(rx,
+		"aiueo1",
+		func(s []string) string {
+			return s[1] + "-" + s[2]
+		})
+	expect = "aiueo-1"
+	if result != expect {
+		t.Fatalf("(3) expect `%s`, but `%s`", expect, result)
+	}
+	result = ReplaceAllStringSubmatchFunc(rx,
+		"aiueo",
+		func(s []string) string {
+			return s[1] + "-" + s[2]
+		})
+	expect = "aiueo-"
+	if result != expect {
+		t.Fatalf("(4) expect `%s`, but `%s`", expect, result)
+	}
 }
