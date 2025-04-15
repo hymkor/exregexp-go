@@ -2,19 +2,29 @@ package exregexp
 
 import (
 	"regexp"
+	"strings"
 )
 
-func ReplaceAllStringSubmatchFunc(rx *regexp.Regexp, s string, f func([]string) string) string {
-	matches := rx.FindAllStringSubmatchIndex(s, -1)
-	for len(matches) > 0 {
-		last := matches[len(matches)-1]
-		matches = matches[:len(matches)-1]
+// ReplaceAllStringSubmatchFunc applies a replacement function to all
+// matches of the regular expression in the input string. The replacement
+// function receives a slice of submatches, where the first element is the
+// entire match and subsequent elements are the capturing groups.
+func ReplaceAllStringSubmatchFunc(rx *regexp.Regexp, input string, f func([]string) string) string {
+	var result strings.Builder
 
-		ss := make([]string, 0, len(last)/2)
-		for i := 0; i < len(last); i += 2 {
-			ss = append(ss, s[last[i]:last[i+1]])
+	matches := rx.FindAllStringSubmatchIndex(input, -1)
+	lastIndex := 0
+	for _, match := range matches {
+		result.WriteString(input[lastIndex:match[0]])
+
+		sub := make([]string, len(match))
+		for i := 0; i*2 < len(match); i++ {
+			sub[i] = input[match[i*2]:match[i*2+1]]
 		}
-		s = s[:last[0]] + f(ss) + s[last[1]:]
+		result.WriteString(f(sub))
+
+		lastIndex = match[1]
 	}
-	return s
+	result.WriteString(input[lastIndex:])
+	return result.String()
 }
