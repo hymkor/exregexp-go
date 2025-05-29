@@ -48,3 +48,13 @@ func main() {
 ```go run example.go|
 example(123) test(456) hello(789)
 ```
+
+Author
+------
+
+- [hymkor (HAYAMA Kaoru)](https://github.com/hymkor)
+
+LICENSE
+-------
+
+- [MIT LICENSE](./LICENSE)
