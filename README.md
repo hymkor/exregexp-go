@@ -1,6 +1,9 @@
 exregexp-go
 ===========
 
+[![Go Reference](https://pkg.go.dev/badge/github.com/hymkor/exregexp-go.svg)](https://pkg.go.dev/github.com/hymkor/exregexp-go)
+[![Go Test](https://github.com/hymkor/exregexp-go/actions/workflows/go.yml/badge.svg)](https://github.com/hymkor/exregexp-go/actions/workflows/go.yml)
+
 `exregexp-go` is a Go package that extends the standard `regexp` library by providing utilities for flexible string replacement using regular expression submatches.
 
 This package introduces the `ReplaceAllStringSubmatchFunc` function, which allows you to leverage capturing groups for custom replacement logic.
