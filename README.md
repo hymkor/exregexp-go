@@ -6,7 +6,7 @@ exregexp-go
 
 `exregexp-go` is a Go package that extends the standard `regexp` library by providing utilities for flexible string replacement using regular expression submatches.
 
-This package introduces the `ReplaceAllStringSubmatchFunc` function, which allows you to leverage capturing groups for custom replacement logic.
+This package introduces the `ReplaceAllSubmatchFunc` and the `ReplaceAllStringSubmatchFunc` function, which allows you to leverage capturing groups for custom replacement logic.
 
 Features
 --------
